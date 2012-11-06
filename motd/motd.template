@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
-Welcome to {{ grains['fqdn']|capitalize }} !
+Welcome to {{ grains['fqdn']|upper }} !
 
 This server is configured using salt (saltstack.org). Please do not change
 anything directly, but instead modify server configuration via configuration
