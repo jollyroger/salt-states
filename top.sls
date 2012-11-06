@@ -3,3 +3,4 @@
 base:
   '*':
     - ntp
+    - motd

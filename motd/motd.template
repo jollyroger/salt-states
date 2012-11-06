@@ -1,0 +1,7 @@
+------------------------------------------------------------------------------
+Welcome to {{ grains['fqdn']|capitalize }} !
+
+This server is configured using salt (saltstack.org). Please do not change
+anything directly, but instead modify server configuration via configuration
+repository.
+------------------------------------------------------------------------------
