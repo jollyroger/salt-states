@@ -1,15 +1,18 @@
 include:
   - minion
 
+python-mysqldb:
+  pkg:
+    - installed
+
 extend:
   salt-minion:
-    pkg.installed:
-      - names:
-        - python-mysqldb
     cmd.wait:
       - watch:
         - pkg: python-mysqldb
     file.managed:
+      - watch:
+        - pkg: python-mysqldb
       - context:
         module_settings:
           - mysql:
