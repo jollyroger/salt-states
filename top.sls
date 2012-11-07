@@ -2,5 +2,7 @@
 
 base:
   '*':
+    - minion
     - ntp
     - motd
+    - mysql
