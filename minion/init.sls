@@ -18,5 +18,4 @@ salt-minion:
     - source: salt://minion/minion.template
     - template: jinja
     - context:
-        master: salt.example.com
-  
+      master: salt.example.com
