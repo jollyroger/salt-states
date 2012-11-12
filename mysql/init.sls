@@ -1,26 +1,16 @@
 include:
   - minion
 
-python-mysqldb:
-  pkg:
-    - installed
-
-extend:
-  salt-minion:
-    cmd.wait:
-      - watch:
-        - pkg: python-mysqldb
-    file.managed:
-      - watch:
-        - pkg: python-mysqldb
-      - context:
-        module_settings:
-          - mysql:
-            - default_file: /etc/mysql/debian.cnf
-
-#mysql-server:
-#  pkg:
-#    - installed
-#  service:
-#    - name: "mysql"
-#    - running
+salt-mysql-module:
+  pkg.installed:
+    - name: python-mysqldb
+  file.managed:
+    - name: /etc/salt/minion.d/mysql.conf
+    - source: salt://mysql/salt_mysql.conf
+    - user: root
+    - group: root
+    - mode: 0644
+    - require:
+      - pkg: python-mysqldb
+    - watch_in:
+      - cmd: salt-minion
