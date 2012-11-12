@@ -1,4 +1,19 @@
+# Configuration file for salt-minion. Some workaround is present here:
+# currently salt-minion cannot restart itself, thus it's impossible to restart
+# minion after valuable changes like changing config file.
+
+/etc/salt/minion.d:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 0755
+    - require:
+      - pkg: salt-minion
+
 salt-minion:
+  service:
+    - running
+    - enable: True
   pkg.installed:
     - names:
       - salt-minion
@@ -8,6 +23,7 @@ salt-minion:
     - watch:
       - pkg: salt-minion
       - file: /etc/salt/minion
+      - file: /etc/salt/minion.d
     - require:
       - pkg: at
   file.managed:
