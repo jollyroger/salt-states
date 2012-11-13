@@ -2,7 +2,7 @@
 
 base:
   '*':
-    - minion
+    - salt.minion
     - ntp
     - motd
     - mysql

@@ -2,37 +2,38 @@
 # currently salt-minion cannot restart itself, thus it's impossible to restart
 # minion after valuable changes like changing config file.
 
-/etc/salt/minion.d:
+/etc/salt/master.d:
   file.directory:
     - user: root
     - group: root
     - mode: 0755
     - require:
-      - pkg: salt-minion
+      - pkg: salt-master
 
-salt-minion:
+salt-master:
   service:
     - running
     - enable: True
   pkg.installed:
     - names:
-      - salt-minion
+      - salt-master
       - at
   cmd.wait:
-    - name: "echo 'invoke-rc.d salt-minion restart'|at now + 1 min"
+    - name: "echo 'invoke-rc.d salt-master restart'|at now + 1 min"
     - watch:
-      - pkg: salt-minion
-      - file: /etc/salt/minion
-      - file: /etc/salt/minion.d
+      - pkg: salt-master
+      - file: /etc/salt/master
+      - file: /etc/salt/master.d
     - require:
       - pkg: at
   file.managed:
-    - name: /etc/salt/minion
+    - name: /etc/salt/master
     - owner: root
     - group: root
     - mode: 0644
-    - source: salt://minion/minion.template
+    - source: salt://salt/master.template
     - template: jinja
     - context:
-      master: salt.example.com
-      state_verbose: False
+      file_roots:
+        base:
+          - /srv/salt
