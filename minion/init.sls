@@ -35,3 +35,4 @@ salt-minion:
     - template: jinja
     - context:
       master: salt.example.com
+      state_verbose: False
