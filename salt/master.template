@@ -116,6 +116,13 @@
 #failhard: False
 {% if failhard is defined -%} failhard: {{ failhard }}{% endif %}
 
+# state_verbose allows for the data returned from the minion to be more
+# verbose. Normally only states that fail or states that have changes are
+# returned, but setting state_verbose to True will return all states that
+# were checked
+#state_verbose: False
+{% if state_verbose is defined -%} state_verbose: {{ state_verbose }}{% endif %}
+
 #####      File Server settings      #####
 ##########################################
 # Salt runs a lightweight file server written in zeromq to deliver files to

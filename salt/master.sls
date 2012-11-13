@@ -34,6 +34,7 @@ salt-master:
     - source: salt://salt/master.template
     - template: jinja
     - context:
+      state_verbose: False
       file_roots:
         base:
           - /srv/salt
