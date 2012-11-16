@@ -8,8 +8,10 @@ lsb-release:
     - user: root
     - group: root
     - clean: True
+
+apt-get update:
   cmd.wait:
-   - name: "apt-get update"
+   - order: 20
    - watch:
      - file: /etc/apt/sources.list
      - file: /etc/apt/sources.list.d
