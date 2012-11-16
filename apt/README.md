@@ -11,6 +11,7 @@ features are:
    - recommended and suggested packages are not installed by default
    - run dist-upgrade on release change
  * /etc/apt/preferences and /etc/apt/preferences.d:
+   - prepare environment for apt-pinning.
 
 # Usage
 
@@ -44,18 +45,18 @@ Every repository can be defined by at least it's name. This will assume to
 point to an official binary Debian repository with a single `main` component
 used.
 
-  * name - a distribution to be used. Should be set manually$
-  * arch - list of architectures used with multiarch features; not set by
+  * `name` - a distribution to be used. Should be set manually;
+  * `arch` - list of architectures used with multiarch features; not set by
     default;
-  * components - list of repository components to used; set to [main];
-  * trusted - assume all packages from this repository are trusted; not set by
+  * `components` - list of repository components to used; set to [main];
+  * `trusted` - assume all packages from this repository are trusted; not set by
     default;
-  * type - list of types of repository to use; types are `binary` and `source`
+  * `type` - list of types of repository to use; types are `binary` and `source`
     that will genedate `deb` and `deb-src` lines respectively; defaults to
-    [binary]
-  * url - repository URL; cdn.debian.org is used by default
+    `[binary]`
+  * `url` - repository URL; cdn.debian.org is used by default
 
 # TODO
 
- * Run `dpkg --add-architecture` when new architecture appears as well as `dpkg
+ * run `dpkg --add-architecture` when new architecture appears as well as `dpkg
    --remove-architecture` when disappears
