@@ -1,0 +1,25 @@
+# DO NOT EDIT BY HAND! YOUR CHANGES WILL BE OVERWRITTEN!
+# This file is maintained by salt (saltstack.org).
+
+{%- set multiarch_releases = ["wheezy", "sid", "unstable", "testing"] -%}
+{%- set default_url = "http://cdn.debian.net/debian" -%}
+
+{% for repository in repositories %}
+  {%- if "binary" in repository.type|d(["binary"]) %}
+deb {% if repository.name in multiarch_releases and
+        (repository.arch is defined or repository.trusted is defined) -%}
+    [
+      {%- if repository.arch is defined -%}
+        {{ "arch=%s " % repository.arch|join(",") }}
+      {%- endif -%}
+      {%- if repository.trusted is defined %}
+        {{ "trusted=%s " % "yes" if repository.trusted else "no"}}
+      {%- endif -%}
+    ] {% endif -%}
+{{ repository.url|d(default_url) }} {{ repository.name }} {{ repository.components|d(["main"])|join(" ") }}
+    {%- endif -%}
+
+    {%- if "source" in repository.type|default([]) %}
+deb-src {{ repository.url|d(default_url) }} {{ repository.name }} {{ repository.components|d(["main"])|join(" ") }}
+    {%- endif -%}
+{% endfor %}
