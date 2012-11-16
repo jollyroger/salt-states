@@ -7,8 +7,17 @@
     - user: root
     - group: root
     - mode: 0755
+    - clean: True
     - require:
       - pkg: salt-master
+  cmd.wait:
+    - name: "echo 'invoke-rc.d salt-master restart'|at now + 1 min"
+    - watch:
+      - pkg: salt-master
+      - file: /etc/salt/master
+      - file: /etc/salt/master.d
+    - require:
+      - pkg: at
 
 salt-master:
   service:
@@ -18,14 +27,6 @@ salt-master:
     - names:
       - salt-master
       - at
-  cmd.wait:
-    - name: "echo 'invoke-rc.d salt-master restart'|at now + 1 min"
-    - watch:
-      - pkg: salt-master
-      - file: /etc/salt/master
-      - file: /etc/salt/master.d
-    - require:
-      - pkg: at
   file.managed:
     - name: /etc/salt/master
     - owner: root

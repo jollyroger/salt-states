@@ -7,8 +7,17 @@
     - user: root
     - group: root
     - mode: 0755
+    - clean: True
     - require:
       - pkg: salt-minion
+  cmd.wait:
+    - name: "echo 'invoke-rc.d salt-minion restart'|at now + 1 min"
+    - watch:
+      - pkg: salt-minion
+      - file: /etc/salt/minion
+      - file: /etc/salt/minion.d
+    - require:
+      - pkg: at
 
 salt-minion:
   service:
@@ -18,14 +27,6 @@ salt-minion:
     - names:
       - salt-minion
       - at
-  cmd.wait:
-    - name: "echo 'invoke-rc.d salt-minion restart'|at now + 1 min"
-    - watch:
-      - pkg: salt-minion
-      - file: /etc/salt/minion
-      - file: /etc/salt/minion.d
-    - require:
-      - pkg: at
   file.managed:
     - name: /etc/salt/minion
     - owner: root
@@ -35,4 +36,3 @@ salt-minion:
     - template: jinja
     - context:
       master: salt.example.com
-      state_verbose: False
