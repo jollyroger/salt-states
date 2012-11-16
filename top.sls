@@ -3,6 +3,6 @@
 base:
   '*':
     - salt.minion
+    - apt
     - ntp
     - motd
-    - mysql
