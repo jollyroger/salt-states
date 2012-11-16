@@ -8,6 +8,11 @@ lsb-release:
     - user: root
     - group: root
     - clean: True
+  cmd.wait:
+   - name: "apt-get update"
+   - watch:
+     - file: /etc/apt/sources.list
+     - file: /etc/apt/sources.list.d
 
 /etc/apt/sources.list:
   file.managed:
@@ -23,8 +28,3 @@ lsb-release:
         - name: {{ grains.lsb_codename|d("stable") }}/updates
           url: http://security.debian.org/
           components: [main, contrib, non-free]
-  cmd.wait:
-   - name: "apt-get update"
-   - watch:
-     - file: /etc/apt/sources.list
-     - file: /etc/apt/sources.list.d
