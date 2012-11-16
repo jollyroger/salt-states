@@ -1,15 +1,13 @@
 include:
   - apt.sources
 
-extend:
-  /etc/apt/sources.list.d:
-    file:
-      - require:
-        - file: /etc/apt/sources.list.d/dotdeb.org.list
-    cmd.wait:
-      - watch:
-        - file: /etc/apt/sources.list.d/dotdeb.org.list
-
+insert_dotdeb_key:
+  cmd.wait:
+    - name: apt-key adv --keyserver keys.gnupg.net --recv-keys E9C74FEEA2098A6E
+    - unless: apt-key adv --list-keys E9C74FEEA2098A6E
+    - order: 10
+    - watch:
+      - file: /etc/apt/sources.list.d/dotdeb.org.list
 
 /etc/apt/sources.list.d/dotdeb.org.list:
   file.managed:
@@ -18,16 +16,13 @@ extend:
     - group: root
     - template: jinja
     - source: salt://apt/sources.list
+    - require_in:
+      - file: /etc/apt/sources.list.d
+    - watch_in:
+      - cmd: "apt-get update"
     - context:
       repositories:
         - name: squeeze
           url: http://packages.dotdeb.org
           components: [all]
 
-
-insert_dotdeb_key:
-  cmd.wait:
-    - name: apt-key adv --keyserver keys.gnupg.net --recv-keys 89DF5277
-    - unless: apt-key adv --list-keys 89DF5277
-    - watch:
-      - file: /etc/apt/sources.list.d/dotdeb.org.list
