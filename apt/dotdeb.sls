@@ -25,4 +25,9 @@ insert_dotdeb_key:
         - name: squeeze
           url: http://packages.dotdeb.org
           components: [all]
+        {% if pillar['dotdeb_php54'] %}
+        - name: squeeze-php54
+          url: http://packages.dotdeb.org
+          components: [all]
+        {% endif %}
 
