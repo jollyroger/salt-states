@@ -16,6 +16,7 @@ apt-get update:
      - file: /etc/apt/sources.list
      - file: /etc/apt/sources.list.d
 
+{% set distribution = pillar.distribution|d(grains.lsb_codename)|d("stable") %}
 /etc/apt/sources.list:
   file.managed:
     - mode: 0644
@@ -25,8 +26,12 @@ apt-get update:
     - source: salt://apt/sources.list
     - context:
       repositories:
-        - name: {{ grains.lsb_codename|d("stable") }}
+      {% if pillar['repositories'] is defined %}
+        {{ pillar['repositories'] }}
+      {% else %}
+        - name: {{ distribution }}
           components: [main, contrib, non-free]
-        - name: {{ grains.lsb_codename|d("stable") }}/updates
+        - name: {{ distribution }}/updates
           url: http://security.debian.org/
           components: [main, contrib, non-free]
+      {% endif %}
