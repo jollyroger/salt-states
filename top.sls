@@ -7,6 +7,7 @@ base:
     - ntp
     - motd
     - vim
+    - git
     {% for module in pillar["modules"]|d([]) %}
     - {{ module }}
     {% endfor %}
