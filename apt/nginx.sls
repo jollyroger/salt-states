@@ -7,7 +7,7 @@ insert_nginx_key:
     - unless: apt-key adv --list-keys 7BD9BF62
     - order: 10
     - watch:
-      - file: /etc/apt/sources.list.d/nginx.com.list
+      - file: /etc/apt/sources.list.d/nginx.org.list
 
 
 /etc/apt/sources.list.d/nginx.org.list:
