@@ -1,7 +1,7 @@
-{% if grains.lsb_release is not defined %}
 include:
   - salt.minion.lsb
-{% else %}
+
+{% if grains.lsb_release is defined %}
 
 /etc/apt/sources.list.d:
   file.directory:

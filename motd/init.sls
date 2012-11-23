@@ -3,12 +3,10 @@
 # packages are installed. In this case another run of state.highstate is 
 # required to actually perform actions described in this state.
 
-
-{% if grains.lsb_release is not defined %}
 include:
   - salt.minion.lsb
-{% else %}
 
+{% if grains.lsb_release is defined %}
 initscripts:
   pkg:
     - installed
