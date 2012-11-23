@@ -1,6 +1,7 @@
-lsb-release:
-  pkg:
-    - installed
+{% if grains.lsb_release is not defined %}
+include:
+  - salt.minion.lsb
+{% else %}
 
 /etc/apt/sources.list.d:
   file.directory:
@@ -35,3 +36,5 @@ apt-get update:
           url: http://security.debian.org/
           components: [main, contrib, non-free]
       {% endif %}
+
+{% endif %}

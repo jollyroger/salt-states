@@ -5,10 +5,8 @@
 
 
 {% if grains.lsb_release is not defined %}
-lsb-release:
-  pkg:
-    - installed
-
+include:
+  - salt.minion.lsb
 {% else %}
 
 initscripts:

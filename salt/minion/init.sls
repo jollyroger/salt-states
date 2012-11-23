@@ -10,8 +10,11 @@
     - clean: True
     - require:
       - pkg: salt-minion
+
+restart_minion:
   cmd.wait:
     - name: "echo 'invoke-rc.d salt-minion restart'|at now + 1 min"
+    - order: last
     - watch:
       - pkg: salt-minion
       - file: /etc/salt/minion
