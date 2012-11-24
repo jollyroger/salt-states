@@ -1,12 +1,13 @@
 include: 
   - salt.minion
 
-salt-mysql-module:
-  pkg.installed:
-    - name: python-mysqldb
+python-mysqldb:
+  pkg:
+    - installed
+
+/etc/salt/minion.d/mysql.conf:
   file.managed:
-    - name: /etc/salt/minion.d/mysql.conf
-    - source: salt://salt/minion/salt_mysql.conf
+    - source: salt://salt/minion/mysql.conf
     - user: root
     - group: root
     - mode: 0644

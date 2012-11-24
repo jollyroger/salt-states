@@ -1,2 +1,22 @@
-include:
-  - mysql.{{ pillar["mysql-provider"]|d("debian") }}.common
+mysql-common:
+  pkg:
+    - installed
+
+/etc/mysql:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 0755
+    - clear: True
+    - require:
+      - file: /etc/mysql/conf.d
+      - pkg: mysql-common
+
+/etc/mysql/conf.d:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 0755
+    - clear: True
+    - require:
+      - pkg: mysql-common

@@ -35,7 +35,7 @@ salt-minion:
     - owner: root
     - group: root
     - mode: 0644
-    - source: salt://salt/minion.template
+    - source: salt://salt/minion/config
     - template: jinja
     - context:
       master: salt.example.com
