@@ -5,8 +5,4 @@ include:
 extend:
   mysql-common:
     pkg.installed:
-      - name:
-        - percona-server-common
-    file.directory:
-      - require:
-        - pkg: percona-server-common
+      - name: percona-server-common

@@ -1,5 +1,5 @@
 include:
-  - mysql.percona.common
+  - mysql.percona.client
   - mysql.server
 
 extend:
