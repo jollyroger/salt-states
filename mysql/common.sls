@@ -1,6 +1,6 @@
 mysql-common:
-  pkg:
-    - installed
+  pkg.installed:
+    - name: {{ "mysql-common" if pillar["mysql-version"] is not defined else "mysql-common-%s" % pillar["mysql-version"] }}
 
 /etc/mysql:
   file.directory:

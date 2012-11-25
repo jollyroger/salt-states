@@ -50,7 +50,7 @@ include:
       - file: /etc/mysql/conf.d
 
 mysql-server:
-  pkg:
-    - installed
+  pkg.installed:
+    - name: {{ "mysql-server" if pillar["mysql-version"] is not defined else "mysql-server-%s" % pillar["mysql-version"] }}
   service.running:
     - name: mysql

@@ -2,8 +2,8 @@ include :
   - mysql.common
 
 mysql-client:
-  pkg:
-    - installed
+  pkg.installed:
+    - name: {{ "mysql-client" if pillar["mysql-version"] is not defined else "mysql-client-%s" % pillar["mysql-version"] }}
 
 /etc/mysql/conf.d/client-encoding-and-collation.cnf:
   file.managed:

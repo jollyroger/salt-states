@@ -4,11 +4,13 @@
 
 include:
   - salt.minion.mysql
+
   {% if pillar["mysql-provider"]|d("debian") != "debian" %}
-  - {{ "mysql.%s" % pillar["mysql-provider"] }}
+  - {{ "mysql.%s.server" % pillar["mysql-provider"] }}
+
   {% else %}
-  - mysql.common
-  - mysql.client
+
   - mysql.server
   - mysql.config
+
   {% endif %}
