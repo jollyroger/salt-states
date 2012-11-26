@@ -1,5 +1,6 @@
 include:
   - apt.sources
+  - apt.preferences
 
 insert_percona_key:
   cmd.wait:
@@ -25,3 +26,13 @@ insert_percona_key:
       repositories:
         - name: squeeze
           url: http://repo.percona.com/apt
+
+
+/etc/apt/preferences.d/percona.pref:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 0644
+    - source: salt://apt/percona.pref
+    - require_in: 
+      - file: /etc/apt/preferences.d

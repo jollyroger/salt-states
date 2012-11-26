@@ -1,0 +1,3 @@
+Package: *
+Pin:  release l=percona
+Pin-Priority: 1001
