@@ -32,7 +32,7 @@ salt-master:
     - owner: root
     - group: root
     - mode: 0644
-    - source: salt://salt/master.template
+    - source: salt://salt/master/config.template
     - template: jinja
     - context:
       state_verbose: False
