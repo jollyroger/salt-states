@@ -12,7 +12,7 @@ ntp:
       - group: ntp
   user.present:
     - system: true
-    - gid: {{ salt['file.group_to_gid']('ntp') }}
+    - gid_from_name: true
     - home: /home/ntp
     - shell: /bin/false
     - require:
