@@ -8,6 +8,7 @@ base:
     - motd
     - vim
     - git
+    - ssl
     {% for module in pillar["modules"]|d([]) %}
     - {{ module }}
     {% endfor %}
