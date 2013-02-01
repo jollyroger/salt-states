@@ -7,7 +7,7 @@ ssl-cert:
   group.present:
     - require:
       - pkg: ssl-cert
-  file.present:
+  file.exists:
     - names:
       - /etc/ssl/certs/ssl-cert-snakeoil.pem
       - /etc/ssl/private/ssl-cert-snakeoil.key
