@@ -5,7 +5,7 @@ ca-certificates:
   pkg:
     - installed
   file.managed:
-    - name:
+    - names:
       - /etc/ca-certificates.conf
       - /etc/ssl/certs/ca-certificates.crt
     - mode: 0644
