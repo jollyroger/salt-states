@@ -8,9 +8,9 @@ openssl:
     - group: root
     - require:
       - pkg: openssl
-      - file: ca-certificates-dirs
+      - file: ssl-certificates-dirs
 
-ca-certificates-dirs:
+ssl-certificates-dirs:
   file.directory:
     - names:
       - /etc/ssl/
